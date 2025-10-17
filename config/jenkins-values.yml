@@ -1,0 +1,38 @@
+controller:
+  # 플러그인 설치 비활성화
+  installPlugins: []
+
+  # 업데이트 사이트 직접 지정
+  env:
+    - name: JENKINS_UC
+      value: "http://updates.jenkins.io/update-center.json"
+
+  # Jenkins 관리자 계정 설정(기본값)
+  securityContext:
+    runAsUser: 1000
+    fsGroup: 1000
+
+  # 사용자 설정
+  admin:
+    username: "admin"
+    password: "admin"
+
+  # 리소스 제한
+  resources:
+    requests:
+      cpu: "200m"
+      memory: "512Mi"
+    limits:
+      cpu: "500m"
+      memory: "1024Mi"
+
+  # 외부 접근을 위해 NodePort 서비스 사용
+  serviceType: "NodePort"
+
+# PVC 설정
+persistence:
+  enabled: true
+  existingClaim: "jenkins-pvc"
+  accessMode: "ReadWriteMany"
+  size: "8Gi"
+
