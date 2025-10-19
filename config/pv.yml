@@ -1,0 +1,16 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: jenkins-pv
+  namespace: jenkins
+spec:
+  # 볼륨 특성
+  capacity:
+    storage: 8Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  # 볼륨 정의
+  nfs:
+    server: 192.168.10.14
+    path: /jenkins
